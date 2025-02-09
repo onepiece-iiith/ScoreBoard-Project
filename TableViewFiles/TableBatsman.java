@@ -4,13 +4,13 @@ public class TableBatsman {
 
     private String playerName;
     private String outType;
-    private String batsmanRun;
-    private String ballPlayed;
-    private String fourRun;
-    private String sixRun;
-    private String strikeRate;
+    private int batsmanRun;
+    private int ballPlayed;
+    private int fourRun;
+    private int sixRun;
+    private double strikeRate;
 
-    public TableBatsman(String playerName, String outType, String batsmanRun, String ballPlayed, String fourRun, String sixRun, String strikeRate) {
+    public TableBatsman(String playerName, String outType, int batsmanRun, int ballPlayed, int fourRun, int sixRun, double strikeRate) {
         this.playerName = playerName;
         this.outType = outType;
         this.batsmanRun = batsmanRun;
@@ -28,23 +28,23 @@ public class TableBatsman {
         return outType;
     }
 
-    public String getBatsmanRun() {
+    public int getBatsmanRun() {
         return batsmanRun;
     }
 
-    public String getBallPlayed() {
+    public int getBallPlayed() {
         return ballPlayed;
     }
 
-    public String getFourRun() {
+    public int getFourRun() {
         return fourRun;
     }
 
-    public String getSixRun() {
+    public int getSixRun() {
         return sixRun;
     }
 
-    public String getStrikeRate() {
+    public double getStrikeRate() {
         return strikeRate;
     }
 
@@ -56,23 +56,23 @@ public class TableBatsman {
         this.outType = outType;
     }
 
-    public void setBatsmanRun(String batsmanRun) {
+    public void setBatsmanRun(int batsmanRun) {
         this.batsmanRun = batsmanRun;
     }
 
-    public void setBallPlayed(String ballPlayed) {
+    public void setBallPlayed(int ballPlayed) {
         this.ballPlayed = ballPlayed;
     }
 
-    public void setFourRun(String fourRun) {
+    public void setFourRun(int fourRun) {
         this.fourRun = fourRun;
     }
 
-    public void setSixRun(String sixRun) {
+    public void setSixRun(int sixRun) {
         this.sixRun = sixRun;
     }
- 
-    public void setStrikeRate(String strikeRate) {
+
+    public void setStrikeRate(double strikeRate) {
         this.strikeRate = strikeRate;
     }
 }

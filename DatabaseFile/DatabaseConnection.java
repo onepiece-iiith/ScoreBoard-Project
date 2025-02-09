@@ -42,19 +42,19 @@ public class DatabaseConnection {
         String sql1 = "CREATE DATABASE " + databaseName + ";";
         String sql2 = "USE " + databaseName + ";";
 
-        String sql3 = "CREATE TABLE BATSMAN1 (batsman_name varchar(70), out_type varchar(200), " +
-                                                "batsman_run varchar(10), ball_played varchar(10), four_run varchar(10), six_run varchar(10), " +
-                                                "strike_rate varchar(10));";
+        String sql3 = "CREATE TABLE BATSMAN1 (batsman_name varchar(70), out_type varchar(200), "
+                                                + "batsman_run INT, ball_played INT, four_run INT, six_run INT, "
+                                                + "strike_rate DOUBLE);";
 
-        String sql4 = "CREATE TABLE BOWLER1 (bowler_name varchar(70), bowler_over varchar(10), maiden_over varchar(10), run_given varchar(10), wicket_taken varchar(10), " +
-                                            "wide_ball varchar(10), no_ball varchar(10), economy varchar(10));";
+        String sql4 = "CREATE TABLE BOWLER1 (bowler_name varchar(70), bowler_over DOUBLE, maiden_over INT, run_given INT, wicket_taken INT, "
+                                            + "wide_ball INT, no_ball INT, economy DOUBLE);";
 
-        String sql5 = "CREATE TABLE BATSMAN2 (batsman_name varchar(70), out_type varchar(200), " +
-                                            "batsman_run varchar(10), ball_played varchar(10), four_run varchar(10), six_run varchar(10), " +
-                                            "strike_rate varchar(10));";
+        String sql5 = "CREATE TABLE BATSMAN2 (batsman_name varchar(70), out_type varchar(200), "
+                                            + "batsman_run INT, ball_played INT, four_run INT, six_run INT, "
+                                            + "strike_rate DOUBLE);";
 
-        String sql6 = "CREATE TABLE BOWLER2 (bowler_name varchar(70), bowler_over varchar(10), maiden_over varchar(10), run_given varchar(10), wicket_taken varchar(10), " +
-                                            "wide_ball varchar(10), no_ball varchar(10), economy varchar(10));";
+        String sql6 = "CREATE TABLE BOWLER2 (bowler_name varchar(70), bowler_over DOUBLE, maiden_over INT, run_given INT, wicket_taken INT, "
+                                            + "wide_ball INT, no_ball INT, economy DOUBLE);";
 
         String sql7 = "CREATE TABLE matchinfo1 (match_info1 varchar(400));";
 
@@ -112,11 +112,11 @@ public class DatabaseConnection {
 
             String playerName = results.getString("batsman_name");
             String outType = results.getString("out_type");
-            String run = results.getString("batsman_run");
-            String ballPlayed = results.getString("ball_played");
-            String four = results.getString("four_run");
-            String six = results.getString("six_run");
-            String strikeRate = results.getString("strike_rate");
+            int run = results.getInt("batsman_run");
+            int ballPlayed = results.getInt("ball_played");
+            int four = results.getInt("four_run");
+            int six = results.getInt("six_run");
+            double strikeRate = results.getDouble("strike_rate");
 
             TableBatsman batsman = new TableBatsman(playerName,outType,run,ballPlayed,four,six,strikeRate);
 
@@ -141,13 +141,13 @@ public class DatabaseConnection {
         while(results.next()){
 
             String bowlerName = results.getString("bowler_name");
-            String bowlerOver = results.getString("bowler_over");
-            String maidenOver = results.getString("maiden_over");
-            String runGiven = results.getString("run_given");
-            String wicketTaken = results.getString("wicket_taken");
-            String wideBall = results.getString("wide_ball");
-            String noBall = results.getString("no_ball");
-            String economy = results.getString("economy");
+            double bowlerOver = results.getDouble("bowler_over");
+            int maidenOver = results.getInt("maiden_over");
+            int runGiven = results.getInt("run_given");
+            int wicketTaken = results.getInt("wicket_taken");
+            int wideBall = results.getInt("wide_ball");
+            int noBall = results.getInt("no_ball");
+            double economy = results.getDouble("economy");
 
             TableBowler bowler = new TableBowler(bowlerName,bowlerOver,maidenOver,runGiven,wicketTaken,wideBall,noBall,economy);
 
