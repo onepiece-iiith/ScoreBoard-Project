@@ -27,14 +27,12 @@ public class DatabaseNames {
             file.close();
             buffer.close();
             output.close();
-        }catch (Exception e){
-            e.printStackTrace();
+        }catch (IOException e){
+            JOptionPane.showMessageDialog(null, "Error writing to file: " + e.getMessage());
         }
     }
 
-    public DatabaseNames(){
-
-    }
+    public DatabaseNames(){}
 
     public String getSaveNames() {
         return saveNames;
@@ -47,44 +45,25 @@ public class DatabaseNames {
     public ArrayList<String> getDatabaseNames() throws IOException {
 
 
-
         File file = new File("/ScoreBoard/data/databaseNames.txt");
 
         if(!file.exists()){
-            //JOptionPane.showMessageDialog(null,"Database Names file not found");
-            file.createNewFile();
+            if (!file.createNewFile()) {
+                JOptionPane.showMessageDialog(null, "Error creating database names file.");
+            }
         }
-        Scanner scan = new Scanner(file);
-        ArrayList<String> names = new ArrayList<>();
+        try (Scanner scan = new Scanner(file)) {
+            ArrayList<String> names = new ArrayList<>();
 
-        while(scan.hasNextLine()){
-            String dataName = scan.nextLine();
-            names.add(dataName);
+            while(scan.hasNextLine()){
+                String dataName = scan.nextLine();
+                names.add(dataName);
+            }
+            return names;
+        } catch (FileNotFoundException e) {
+            JOptionPane.showMessageDialog(null, "Error reading database names file: " + e.getMessage());
+            return new ArrayList<>(); // Return empty list on error
         }
-        return names;
-
-
-
-        //InputStream in = new FileInputStream("databaseNames.txt");        // work in compiler
-
-//        InputStream in = getClass().getResourceAsStream("/databaseNames.txt");
-//        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-//
-//        ArrayList<String> names = new ArrayList<>();
-//
-//        String line;
-//        while ((line = reader.readLine())!=null) {
-//            String dataName = line;
-//            names.add(dataName);
-//        }
-//
-//        in.close();
-//        reader.close();
-//
-//
-//        return names;
-
     }
 
 }
-
