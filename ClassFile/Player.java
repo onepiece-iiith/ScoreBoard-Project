@@ -29,4 +29,10 @@ public class Player {
         return team.getName();
     }
 
-}
+    // Add a method to the Player class that performs an operation on its data
+    public String getPlayerInfo(){
+        return "Player Name: "+playerName+"\nTeam: "+team.getName();
+    }
+}    
+
+    
