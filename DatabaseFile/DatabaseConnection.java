@@ -31,11 +31,53 @@ public class DatabaseConnection {
 
     }
 
-    public Connection createDatabase(String newDatabaseName) throws Exception {
+    public DatabaseCreator createDatabase(String newDatabaseName) throws Exception {
+        return new DatabaseCreator(this.databaseUser, this.databasePass, newDatabaseName);
+    }
+
+    public <T extends PlayerStats> ObservableList<T> getPlayerData(String tableName, Class<T> playerStatsClass) throws Exception {
+        Connection connect = getConnection();
+        ObservableList<T> list = FXCollections.observableArrayList();
+
+        String sql = "SELECT * FROM " + tableName + ";";
+
+        PreparedStatement statement = connect.prepareStatement(sql);
+        ResultSet results = statement.executeQuery();
+
+        while (results.next()) {
+            T playerStats = playerStatsClass.getDeclaredConstructor(String.class, String.class, String.class, String.class, String.class, String.class, String.class).newInstance(
+                    results.getString("playerName"),
+                    results.getString("attribute1"),
+                    results.getString("attribute2"),
+                    results.getString("attribute3"),
+                    results.getString("attribute4"),
+                    results.getString("attribute5"),
+                    results.getString("attribute6")
+            );
+            list.add(playerStats);
+        }
+
+        return list;
+    }
+
+}
+
+class DatabaseCreator{
+    private String databaseUser;
+    private String databasePass;
+    private String newDatabaseName;
+
+    public DatabaseCreator(String databaseUser, String databasePass, String newDatabaseName){
+        this.databaseUser = databaseUser;
+        this.databasePass = databasePass;
+        this.newDatabaseName = newDatabaseName;
+    }
+
+    public Connection createDatabase() throws Exception {
 
         String jdbcDriver = "com.mysql.jdbc.Driver";
         String jdbcURL = "jdbc:mysql://localhost/";
-        String databaseName = newDatabaseName;
+        String databaseName = this.newDatabaseName;
         Class.forName(jdbcDriver);
         Connection connectDB = DriverManager.getConnection(jdbcURL, this.databaseUser, this.databasePass);
 
@@ -96,32 +138,6 @@ public class DatabaseConnection {
 
         return connectDB;
     }
-
-    public <T extends PlayerStats> ObservableList<T> getPlayerData(String tableName, Class<T> playerStatsClass) throws Exception {
-        Connection connect = getConnection();
-        ObservableList<T> list = FXCollections.observableArrayList();
-
-        String sql = "SELECT * FROM " + tableName + ";";
-
-        PreparedStatement statement = connect.prepareStatement(sql);
-        ResultSet results = statement.executeQuery();
-
-        while (results.next()) {
-            T playerStats = playerStatsClass.getDeclaredConstructor(String.class, String.class, String.class, String.class, String.class, String.class, String.class).newInstance(
-                    results.getString("playerName"),
-                    results.getString("attribute1"),
-                    results.getString("attribute2"),
-                    results.getString("attribute3"),
-                    results.getString("attribute4"),
-                    results.getString("attribute5"),
-                    results.getString("attribute6")
-            );
-            list.add(playerStats);
-        }
-
-        return list;
-    }
-
 }
 
 class PlayerStats{
@@ -146,59 +162,19 @@ class PlayerStats{
         this.attribute6 = attribute6;
     }
 
-    public String getPlayerName() {
-        return playerName;
-    }
-
-    public void setPlayerName(String playerName) {
-        this.playerName = playerName;
-    }
-
-    public String getAttribute1() {
-        return attribute1;
-    }
-
-    public void setAttribute1(String attribute1) {
-        this.attribute1 = attribute1;
-    }
-
-    public String getAttribute2() {
-        return attribute2;
-    }
-
-    public void setAttribute2(String attribute2) {
-        this.attribute2 = attribute2;
-    }
-
-    public String getAttribute3() {
-        return attribute3;
-    }
-
-    public void setAttribute3(String attribute3) {
-        this.attribute3 = attribute3;
-    }
-
-    public String getAttribute4() {
-        return attribute4;
-    }
-
-    public void setAttribute4(String attribute4) {
-        this.attribute4 = attribute4;
-    }
-
-    public String getAttribute5() {
-        return attribute5;
-    }
-
-    public void setAttribute5(String attribute5) {
-        this.attribute5 = attribute5;
-    }
-
-    public String getAttribute6() {
-        return attribute6;
-    }
-
-    public void setAttribute6(String attribute6) {
-        this.attribute6 = attribute6;
-    }
+    // Getters and setters
+    public String getPlayerName() { return playerName; }
+    public void setPlayerName(String playerName) { this.playerName = playerName; }
+    public String getAttribute1() { return attribute1; }
+    public void setAttribute1(String attribute1) { this.attribute1 = attribute1; }
+    public String getAttribute2() { return attribute2; }
+    public void setAttribute2(String attribute2) { this.attribute2 = attribute2; }
+    public String getAttribute3() { return attribute3; }
+    public void setAttribute3(String attribute3) { this.attribute3 = attribute3; }
+    public String getAttribute4() { return attribute4; }
+    public void setAttribute4(String attribute4) { this.attribute4 = attribute4; }
+    public String getAttribute5() { return attribute5; }
+    public void setAttribute5(String attribute5) { this.attribute5 = attribute5; }
+    public String getAttribute6() { return attribute6; }
+    public void setAttribute6(String attribute6) { this.attribute6 = attribute6; }
 }
