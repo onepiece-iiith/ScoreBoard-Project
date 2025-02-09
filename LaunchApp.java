@@ -33,7 +33,8 @@ public class LaunchApp extends Application {
 
         Image icon = new Image("file:Final Logo.png");                                                  // For IDE
         //Image icon = new Image(getClass().getResourceAsStream("/Final Logo.png"));                      // For JAR
-        createFile();
+        FileHandler fileHandler = new FileHandler();
+        fileHandler.createFiles();
 
 
         primaryStage.getIcons().add(icon);
@@ -69,9 +70,11 @@ public class LaunchApp extends Application {
 
 
 
-    public void createFile() throws IOException {
 
 
+}
+class FileHandler{
+    public void createFiles() throws IOException{
         File teamFile = new File("/ScoreBoard/data/AllTeamName.txt");
         File playerFile = new File("/ScoreBoard/data/AllPlayerName.txt");
 
@@ -85,7 +88,7 @@ public class LaunchApp extends Application {
 
             PrintWriter output1 = new PrintWriter(teamFile);
 
-            for (String names : getTeamList()) {
+            for (String names : FileUtils.readFile("AllTeamName.txt")) {
                 output1.println(names);
             }
 
@@ -104,47 +107,26 @@ public class LaunchApp extends Application {
 
             PrintWriter output2 = new PrintWriter(playerFile);
 
-            for (String names : getPlayerList()) {
+            for (String names : FileUtils.readFile("AllPlayerName.txt")) {
                 output2.println(names);
             }
 
             output2.close();
 
         }
-
-
-        //File databaseFile = new File("/ScoreBoard/data/AllTeamName.txt");
-
-
     }
+}
+class FileUtils{
+    public static ArrayList<String> readFile(String fileName) throws IOException{
+        ArrayList<String> list = new ArrayList<>();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public ArrayList<String> getTeamList() throws IOException {
-
-
-        ArrayList<String> list = new ArrayList<String>();
-
-
-        InputStream in = new FileInputStream("AllTeamName.txt");                    // For IDE
-        //InputStream in = getClass().getResourceAsStream("/AllTeamName.txt");            // For JAR
+        InputStream in = new FileInputStream(fileName);                    // For IDE
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 
 
         String line;
 
-        while ((line=reader.readLine())!=null) {
+        while ((line = reader.readLine()) != null) {
             list.add(line);
         }
 
@@ -153,35 +135,5 @@ public class LaunchApp extends Application {
 
 
         return list;
-
     }
-
-    public ArrayList<String> getPlayerList() throws IOException {
-
-        ArrayList<String> list = new ArrayList<String>();
-
-        InputStream in = new FileInputStream("AllPlayerName.txt");                    // For IDE
-        //InputStream in = getClass().getResourceAsStream("/AllPlayerName.txt");            // For JAR
-        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-
-
-        String line;
-
-        while ((line=reader.readLine())!=null) {
-            list.add(line);
-        }
-
-        in.close();
-        reader.close();
-
-
-        return list;
-
-
-    }
-
-
-
-
-
 }
