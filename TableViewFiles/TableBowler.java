@@ -3,6 +3,31 @@ package TableViewFiles;
 public class TableBowler {
 
     private String bowlerName;
+    private BowlingStatistics bowlingStatistics;
+
+    public TableBowler(String bowlerName, BowlingStatistics bowlingStatistics) {
+        this.bowlerName = bowlerName;
+        this.bowlingStatistics = bowlingStatistics;
+    }
+
+    public String getBowlerName() {
+        return bowlerName;
+    }
+
+    public BowlingStatistics getBowlingStatistics() {
+        return bowlingStatistics;
+    }
+
+    public void setBowlerName(String bowlerName) {
+        this.bowlerName = bowlerName;
+    }
+
+    public void setBowlingStatistics(BowlingStatistics bowlingStatistics) {
+        this.bowlingStatistics = bowlingStatistics;
+    }
+}
+
+class BowlingStatistics {
     private String bowlerOver;
     private String maidenOver;
     private String runGiven;
@@ -11,8 +36,7 @@ public class TableBowler {
     private String noBall;
     private String economy;
 
-    public TableBowler(String bowlerName, String bowlerOver, String maidenOver, String runGiven, String wicketTaken, String wideBall, String noBall, String economy) {
-        this.bowlerName = bowlerName;
+    public BowlingStatistics(String bowlerOver, String maidenOver, String runGiven, String wicketTaken, String wideBall, String noBall, String economy) {
         this.bowlerOver = bowlerOver;
         this.maidenOver = maidenOver;
         this.runGiven = runGiven;
@@ -22,14 +46,7 @@ public class TableBowler {
         this.economy = economy;
     }
 
-    public String getBowlerName() {
-        return bowlerName;
-    }
-
-    public void setBowlerName(String bowlerName) {
-        this.bowlerName = bowlerName;
-    }
-
+    // Getters and setters for all fields
     public String getBowlerOver() {
         return bowlerOver;
     }
