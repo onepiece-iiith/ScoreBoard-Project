@@ -3,23 +3,11 @@ package TableViewFiles;
 public class TableBowler {
 
     private String bowlerName;
-    private int bowlerOver;
-    private int maidenOver;
-    private int runGiven;
-    private int wicketTaken;
-    private int wideBall;
-    private int noBall;
-    private double economy;
+    private BowlingStats bowlingStats;
 
-    public TableBowler(String bowlerName, int bowlerOver, int maidenOver, int runGiven, int wicketTaken, int wideBall, int noBall, double economy) {
+    public TableBowler(String bowlerName, BowlingStats bowlingStats) {
         this.bowlerName = bowlerName;
-        this.bowlerOver = bowlerOver;
-        this.maidenOver = maidenOver;
-        this.runGiven = runGiven;
-        this.wicketTaken = wicketTaken;
-        this.wideBall = wideBall;
-        this.noBall = noBall;
-        this.economy = economy;
+        this.bowlingStats = bowlingStats;
     }
 
     // Getters and setters for all fields
@@ -31,6 +19,35 @@ public class TableBowler {
         this.bowlerName = bowlerName;
     }
 
+    public BowlingStats getBowlingStats() {
+        return bowlingStats;
+    }
+
+    public void setBowlingStats(BowlingStats bowlingStats) {
+        this.bowlingStats = bowlingStats;
+    }
+}
+
+class BowlingStats {
+    private int bowlerOver;
+    private int maidenOver;
+    private int runGiven;
+    private int wicketTaken;
+    private int wideBall;
+    private int noBall;
+    private double economy;
+
+    public BowlingStats(int bowlerOver, int maidenOver, int runGiven, int wicketTaken, int wideBall, int noBall, double economy) {
+        this.bowlerOver = bowlerOver;
+        this.maidenOver = maidenOver;
+        this.runGiven = runGiven;
+        this.wicketTaken = wicketTaken;
+        this.wideBall = wideBall;
+        this.noBall = noBall;
+        this.economy = economy;
+    }
+
+    // Getters and setters for all fields
     public int getBowlerOver() {
         return bowlerOver;
     }

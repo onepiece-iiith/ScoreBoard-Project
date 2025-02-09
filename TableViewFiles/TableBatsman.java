@@ -4,20 +4,12 @@ public class TableBatsman {
 
     private String playerName;
     private String outType;
-    private int batsmanRun;
-    private int ballPlayed;
-    private int fourRun;
-    private int sixRun;
-    private double strikeRate;
+    private BattingStats battingStats;
 
-    public TableBatsman(String playerName, String outType, int batsmanRun, int ballPlayed, int fourRun, int sixRun, double strikeRate) {
+    public TableBatsman(String playerName, String outType, BattingStats battingStats) {
         this.playerName = playerName;
         this.outType = outType;
-        this.batsmanRun = batsmanRun;
-        this.ballPlayed = ballPlayed;
-        this.fourRun = fourRun;
-        this.sixRun = sixRun;
-        this.strikeRate = strikeRate;
+        this.battingStats = battingStats;
     }
 
     // Getters and setters for all fields
@@ -37,6 +29,31 @@ public class TableBatsman {
         this.outType = outType;
     }
 
+    public BattingStats getBattingStats() {
+        return battingStats;
+    }
+
+    public void setBattingStats(BattingStats battingStats) {
+        this.battingStats = battingStats;
+    }
+}
+
+class BattingStats {
+    private int batsmanRun;
+    private int ballPlayed;
+    private int fourRun;
+    private int sixRun;
+    private double strikeRate;
+
+    public BattingStats(int batsmanRun, int ballPlayed, int fourRun, int sixRun, double strikeRate) {
+        this.batsmanRun = batsmanRun;
+        this.ballPlayed = ballPlayed;
+        this.fourRun = fourRun;
+        this.sixRun = sixRun;
+        this.strikeRate = strikeRate;
+    }
+
+    // Getters and setters for all fields
     public int getBatsmanRun() {
         return batsmanRun;
     }
