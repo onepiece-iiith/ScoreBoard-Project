@@ -22,6 +22,7 @@ public class TableBowler {
         this.economy = economy;
     }
 
+    // Getters and setters for all fields
     public String getBowlerName() {
         return bowlerName;
     }
@@ -84,5 +85,16 @@ public class TableBowler {
 
     public void setEconomy(String economy) {
         this.economy = economy;
+    }
+
+    // Add a method to calculate economy rate
+    public double calculateEconomy(){
+        try{
+            double run = Double.parseDouble(runGiven);
+            double over = Double.parseDouble(bowlerOver);
+            return run / over;
+        }catch (NumberFormatException e){
+            return 0.0; // Handle potential exceptions
+        }
     }
 }
