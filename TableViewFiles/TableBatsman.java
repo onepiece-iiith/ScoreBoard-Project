@@ -4,13 +4,13 @@ public class TableBatsman {
 
     private String playerName;
     private String outType;
-    private String batsmanRun;
-    private String ballPlayed;
-    private String fourRun;
-    private String sixRun;
-    private String strikeRate;
+    private int batsmanRun;
+    private int ballPlayed;
+    private int fourRun;
+    private int sixRun;
+    private double strikeRate;
 
-    public TableBatsman(String playerName, String outType, String batsmanRun, String ballPlayed, String fourRun, String sixRun, String strikeRate) {
+    public TableBatsman(String playerName, String outType, int batsmanRun, int ballPlayed, int fourRun, int sixRun, double strikeRate) {
         this.playerName = playerName;
         this.outType = outType;
         this.batsmanRun = batsmanRun;
@@ -20,59 +20,60 @@ public class TableBatsman {
         this.strikeRate = strikeRate;
     }
 
+    // Getters and setters for all fields
     public String getPlayerName() {
         return playerName;
-    }
-
-    public String getOutType() {
-        return outType;
-    }
-
-    public String getBatsmanRun() {
-        return batsmanRun;
-    }
-
-    public String getBallPlayed() {
-        return ballPlayed;
-    }
-
-    public String getFourRun() {
-        return fourRun;
-    }
-
-    public String getSixRun() {
-        return sixRun;
-    }
-
-    public String getStrikeRate() {
-        return strikeRate;
     }
 
     public void setPlayerName(String playerName) {
         this.playerName = playerName;
     }
 
+    public String getOutType() {
+        return outType;
+    }
+
     public void setOutType(String outType) {
         this.outType = outType;
     }
 
-    public void setBatsmanRun(String batsmanRun) {
+    public int getBatsmanRun() {
+        return batsmanRun;
+    }
+
+    public void setBatsmanRun(int batsmanRun) {
         this.batsmanRun = batsmanRun;
     }
 
-    public void setBallPlayed(String ballPlayed) {
+    public int getBallPlayed() {
+        return ballPlayed;
+    }
+
+    public void setBallPlayed(int ballPlayed) {
         this.ballPlayed = ballPlayed;
     }
 
-    public void setFourRun(String fourRun) {
+    public int getFourRun() {
+        return fourRun;
+    }
+
+    public void setFourRun(int fourRun) {
         this.fourRun = fourRun;
     }
 
-    public void setSixRun(String sixRun) {
+    public int getSixRun() {
+        return sixRun;
+    }
+
+    public void setSixRun(int sixRun) {
         this.sixRun = sixRun;
     }
- 
-    public void setStrikeRate(String strikeRate) {
+
+    public double getStrikeRate() {
+        return strikeRate;
+    }
+
+    public void setStrikeRate(double strikeRate) {
         this.strikeRate = strikeRate;
     }
 }

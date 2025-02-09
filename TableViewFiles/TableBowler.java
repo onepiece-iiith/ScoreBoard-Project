@@ -3,15 +3,15 @@ package TableViewFiles;
 public class TableBowler {
 
     private String bowlerName;
-    private String bowlerOver;
-    private String maidenOver;
-    private String runGiven;
-    private String wicketTaken;
-    private String wideBall;
-    private String noBall;
-    private String economy;
+    private int bowlerOver;
+    private int maidenOver;
+    private int runGiven;
+    private int wicketTaken;
+    private int wideBall;
+    private int noBall;
+    private double economy;
 
-    public TableBowler(String bowlerName, String bowlerOver, String maidenOver, String runGiven, String wicketTaken, String wideBall, String noBall, String economy) {
+    public TableBowler(String bowlerName, int bowlerOver, int maidenOver, int runGiven, int wicketTaken, int wideBall, int noBall, double economy) {
         this.bowlerName = bowlerName;
         this.bowlerOver = bowlerOver;
         this.maidenOver = maidenOver;
@@ -22,6 +22,7 @@ public class TableBowler {
         this.economy = economy;
     }
 
+    // Getters and setters for all fields
     public String getBowlerName() {
         return bowlerName;
     }
@@ -30,59 +31,59 @@ public class TableBowler {
         this.bowlerName = bowlerName;
     }
 
-    public String getBowlerOver() {
+    public int getBowlerOver() {
         return bowlerOver;
     }
 
-    public void setBowlerOver(String bowlerOver) {
+    public void setBowlerOver(int bowlerOver) {
         this.bowlerOver = bowlerOver;
     }
 
-    public String getMaidenOver() {
+    public int getMaidenOver() {
         return maidenOver;
     }
 
-    public void setMaidenOver(String maidenOver) {
+    public void setMaidenOver(int maidenOver) {
         this.maidenOver = maidenOver;
     }
 
-    public String getRunGiven() {
+    public int getRunGiven() {
         return runGiven;
     }
 
-    public void setRunGiven(String runGiven) {
+    public void setRunGiven(int runGiven) {
         this.runGiven = runGiven;
     }
 
-    public String getWicketTaken() {
+    public int getWicketTaken() {
         return wicketTaken;
     }
 
-    public void setWicketTaken(String wicketTaken) {
+    public void setWicketTaken(int wicketTaken) {
         this.wicketTaken = wicketTaken;
     }
 
-    public String getWideBall() {
+    public int getWideBall() {
         return wideBall;
     }
 
-    public void setWideBall(String wideBall) {
+    public void setWideBall(int wideBall) {
         this.wideBall = wideBall;
     }
 
-    public String getNoBall() {
+    public int getNoBall() {
         return noBall;
     }
 
-    public void setNoBall(String noBall) {
+    public void setNoBall(int noBall) {
         this.noBall = noBall;
     }
 
-    public String getEconomy() {
+    public double getEconomy() {
         return economy;
     }
 
-    public void setEconomy(String economy) {
+    public void setEconomy(double economy) {
         this.economy = economy;
     }
 }
