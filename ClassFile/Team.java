@@ -25,18 +25,11 @@ public class Team {
         playersList.add(player);
     }
 
-//
-//    public void removePlayer(String playerName) {
-//        for (Player player : playersList) {
-//            if (player.getPlayerName().equals(playerName)) {
-//                playersList.remove(player);
-//            }
-//
-//        }
-//    }
+    public void removePlayer(String playerName) {
+        playersList.removeIf(player -> player.getPlayerName().equals(playerName));
+    }
 
 
- 
 
     public ArrayList<Player> getPlayersList() {
         return playersList;
@@ -53,4 +46,4 @@ public class Team {
     public void setName(String name) {
         this.name = name;
     }
-}
+}    
