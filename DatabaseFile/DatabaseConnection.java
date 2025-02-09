@@ -97,65 +97,108 @@ public class DatabaseConnection {
         return connectDB;
     }
 
-    public ObservableList<TableBatsman> getBatsmanData(String tableName) throws Exception{
-
-
+    public <T extends PlayerStats> ObservableList<T> getPlayerData(String tableName, Class<T> playerStatsClass) throws Exception {
         Connection connect = getConnection();
-        ObservableList<TableBatsman> list = FXCollections.observableArrayList();
+        ObservableList<T> list = FXCollections.observableArrayList();
 
         String sql = "SELECT * FROM " + tableName + ";";
 
         PreparedStatement statement = connect.prepareStatement(sql);
         ResultSet results = statement.executeQuery();
 
-        while(results.next()){
-
-            String playerName = results.getString("batsman_name");
-            String outType = results.getString("out_type");
-            String run = results.getString("batsman_run");
-            String ballPlayed = results.getString("ball_played");
-            String four = results.getString("four_run");
-            String six = results.getString("six_run");
-            String strikeRate = results.getString("strike_rate");
-
-            TableBatsman batsman = new TableBatsman(playerName,outType,run,ballPlayed,four,six,strikeRate);
-
-            list.add(batsman);
-
+        while (results.next()) {
+            T playerStats = playerStatsClass.getDeclaredConstructor(String.class, String.class, String.class, String.class, String.class, String.class, String.class).newInstance(
+                    results.getString("playerName"),
+                    results.getString("attribute1"),
+                    results.getString("attribute2"),
+                    results.getString("attribute3"),
+                    results.getString("attribute4"),
+                    results.getString("attribute5"),
+                    results.getString("attribute6")
+            );
+            list.add(playerStats);
         }
-        return list;
 
+        return list;
     }
 
-    public ObservableList<TableBowler> getBowlerData(String tableName) throws Exception{
+}
 
+class PlayerStats{
 
-        Connection connect = getConnection();
-        ObservableList<TableBowler> list = FXCollections.observableArrayList();
+    private String playerName;
+    private String attribute1;
+    private String attribute2;
+    private String attribute3;
+    private String attribute4;
+    private String attribute5;
+    private String attribute6;
 
-        String sql = "select * from " + tableName + ";";
+    public PlayerStats() {}
 
-        PreparedStatement statement = connect.prepareStatement(sql);
-        ResultSet results = statement.executeQuery();
-
-        while(results.next()){
-
-            String bowlerName = results.getString("bowler_name");
-            String bowlerOver = results.getString("bowler_over");
-            String maidenOver = results.getString("maiden_over");
-            String runGiven = results.getString("run_given");
-            String wicketTaken = results.getString("wicket_taken");
-            String wideBall = results.getString("wide_ball");
-            String noBall = results.getString("no_ball");
-            String economy = results.getString("economy");
-
-            TableBowler bowler = new TableBowler(bowlerName,bowlerOver,maidenOver,runGiven,wicketTaken,wideBall,noBall,economy);
-
-            list.add(bowler);
-
-        }
-        return list;
-
+    public PlayerStats(String playerName, String attribute1, String attribute2, String attribute3, String attribute4, String attribute5, String attribute6) {
+        this.playerName = playerName;
+        this.attribute1 = attribute1;
+        this.attribute2 = attribute2;
+        this.attribute3 = attribute3;
+        this.attribute4 = attribute4;
+        this.attribute5 = attribute5;
+        this.attribute6 = attribute6;
     }
 
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
+    }
+
+    public String getAttribute1() {
+        return attribute1;
+    }
+
+    public void setAttribute1(String attribute1) {
+        this.attribute1 = attribute1;
+    }
+
+    public String getAttribute2() {
+        return attribute2;
+    }
+
+    public void setAttribute2(String attribute2) {
+        this.attribute2 = attribute2;
+    }
+
+    public String getAttribute3() {
+        return attribute3;
+    }
+
+    public void setAttribute3(String attribute3) {
+        this.attribute3 = attribute3;
+    }
+
+    public String getAttribute4() {
+        return attribute4;
+    }
+
+    public void setAttribute4(String attribute4) {
+        this.attribute4 = attribute4;
+    }
+
+    public String getAttribute5() {
+        return attribute5;
+    }
+
+    public void setAttribute5(String attribute5) {
+        this.attribute5 = attribute5;
+    }
+
+    public String getAttribute6() {
+        return attribute6;
+    }
+
+    public void setAttribute6(String attribute6) {
+        this.attribute6 = attribute6;
+    }
 }
