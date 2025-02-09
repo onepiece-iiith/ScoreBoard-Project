@@ -35,7 +35,15 @@ public class DatabaseConnection {
         return new DatabaseCreator(this.databaseUser, this.databasePass, newDatabaseName);
     }
 
-    public <T extends PlayerStats> ObservableList<T> getPlayerData(String tableName, Class<T> playerStatsClass) throws Exception {
+    public  ObservableList<TableBatsman> getBatsmanData(String tableName) throws Exception {
+        return getPlayerData(tableName, TableBatsman.class);
+    }
+
+    public ObservableList<TableBowler> getBowlerData(String tableName) throws Exception {
+        return getPlayerData(tableName, TableBowler.class);
+    }
+
+    private <T extends PlayerStats> ObservableList<T> getPlayerData(String tableName, Class<T> playerStatsClass) throws Exception {
         Connection connect = getConnection();
         ObservableList<T> list = FXCollections.observableArrayList();
 
@@ -84,19 +92,19 @@ class DatabaseCreator{
         String sql1 = "CREATE DATABASE " + databaseName + ";";
         String sql2 = "USE " + databaseName + ";";
 
-        String sql3 = "CREATE TABLE BATSMAN1 (batsman_name varchar(70), out_type varchar(200), " +
-                                                "batsman_run varchar(10), ball_played varchar(10), four_run varchar(10), six_run varchar(10), " +
-                                                "strike_rate varchar(10));";
+        String sql3 = "CREATE TABLE BATSMAN1 (batsman_name varchar(70), out_type varchar(200), "
+                                                + "batsman_run varchar(10), ball_played varchar(10), four_run varchar(10), six_run varchar(10), "
+                                                + "strike_rate varchar(10));";
 
-        String sql4 = "CREATE TABLE BOWLER1 (bowler_name varchar(70), bowler_over varchar(10), maiden_over varchar(10), run_given varchar(10), wicket_taken varchar(10), " +
-                                            "wide_ball varchar(10), no_ball varchar(10), economy varchar(10));";
+        String sql4 = "CREATE TABLE BOWLER1 (bowler_name varchar(70), bowler_over varchar(10), maiden_over varchar(10), run_given varchar(10), wicket_taken varchar(10), "
+                                            + "wide_ball varchar(10), no_ball varchar(10), economy varchar(10));";
 
-        String sql5 = "CREATE TABLE BATSMAN2 (batsman_name varchar(70), out_type varchar(200), " +
-                                            "batsman_run varchar(10), ball_played varchar(10), four_run varchar(10), six_run varchar(10), " +
-                                            "strike_rate varchar(10));";
+        String sql5 = "CREATE TABLE BATSMAN2 (batsman_name varchar(70), out_type varchar(200), "
+                                            + "batsman_run varchar(10), ball_played varchar(10), four_run varchar(10), six_run varchar(10), "
+                                            + "strike_rate varchar(10));";
 
-        String sql6 = "CREATE TABLE BOWLER2 (bowler_name varchar(70), bowler_over varchar(10), maiden_over varchar(10), run_given varchar(10), wicket_taken varchar(10), " +
-                                            "wide_ball varchar(10), no_ball varchar(10), economy varchar(10));";
+        String sql6 = "CREATE TABLE BOWLER2 (bowler_name varchar(70), bowler_over varchar(10), maiden_over varchar(10), run_given varchar(10), wicket_taken varchar(10), "
+                                            + "wide_ball varchar(10), no_ball varchar(10), economy varchar(10));";
 
         String sql7 = "CREATE TABLE matchinfo1 (match_info1 varchar(400));";
 
