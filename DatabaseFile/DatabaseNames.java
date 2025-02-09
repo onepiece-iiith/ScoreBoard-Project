@@ -2,11 +2,16 @@ package DatabaseFile;
 
 import javax.swing.*;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 
 public class DatabaseNames {
+    private final String dataDirectory = "/ScoreBoard/data/";
+    private final String databaseNamesFileName = "databaseNames.txt";
     private String saveNames;
 
     public DatabaseNames(String saveNames){
@@ -14,8 +19,9 @@ public class DatabaseNames {
         this.saveNames = saveNames;
 
         try {
-
-            FileWriter file = new FileWriter("/ScoreBoard/data/databaseNames.txt", true);
+            Path filePath = Paths.get(dataDirectory, databaseNamesFileName);
+            Files.createDirectories(filePath.getParent());
+            FileWriter file = new FileWriter(filePath.toString(), true);
             BufferedWriter buffer = new BufferedWriter(file);
             PrintWriter output = new PrintWriter(buffer);
 
@@ -32,9 +38,7 @@ public class DatabaseNames {
         }
     }
 
-    public DatabaseNames(){
-
-    }
+    public DatabaseNames(){}
 
     public String getSaveNames() {
         return saveNames;
@@ -45,13 +49,10 @@ public class DatabaseNames {
     }
 
     public ArrayList<String> getDatabaseNames() throws IOException {
-
-
-
-        File file = new File("/ScoreBoard/data/databaseNames.txt");
+        Path filePath = Paths.get(dataDirectory, databaseNamesFileName);
+        File file = filePath.toFile();
 
         if(!file.exists()){
-            //JOptionPane.showMessageDialog(null,"Database Names file not found");
             file.createNewFile();
         }
         Scanner scan = new Scanner(file);
@@ -61,30 +62,8 @@ public class DatabaseNames {
             String dataName = scan.nextLine();
             names.add(dataName);
         }
+        scan.close();
         return names;
 
-
-
-        //InputStream in = new FileInputStream("databaseNames.txt");        // work in compiler
-
-//        InputStream in = getClass().getResourceAsStream("/databaseNames.txt");
-//        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-//
-//        ArrayList<String> names = new ArrayList<>();
-//
-//        String line;
-//        while ((line = reader.readLine())!=null) {
-//            String dataName = line;
-//            names.add(dataName);
-//        }
-//
-//        in.close();
-//        reader.close();
-//
-//
-//        return names;
-
     }
-
 }
-
