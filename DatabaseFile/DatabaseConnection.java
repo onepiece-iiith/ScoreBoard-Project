@@ -62,42 +62,22 @@ public class DatabaseConnection {
 
         String sql9 = "CREATE TABLE match_status (match_status varchar(400));";
 
+        String[] sqls = {sql1, sql2, sql3, sql4, sql5, sql6, sql7, sql8, sql9};
         
-        PreparedStatement statement1 = connectDB.prepareStatement(sql1);
-        PreparedStatement statement2 = connectDB.prepareStatement(sql2);
-        PreparedStatement statement3 = connectDB.prepareStatement(sql3);
-        PreparedStatement statement4 = connectDB.prepareStatement(sql4);
-        PreparedStatement statement5 = connectDB.prepareStatement(sql5);
-        PreparedStatement statement6 = connectDB.prepareStatement(sql6);
-        PreparedStatement statement7 = connectDB.prepareStatement(sql7);
-        PreparedStatement statement8 = connectDB.prepareStatement(sql8);
-        PreparedStatement statement9 = connectDB.prepareStatement(sql9);
-
-
-        statement1.executeUpdate();
-        statement2.executeUpdate();
-        statement3.executeUpdate();
-        statement4.executeUpdate();
-        statement5.executeUpdate();
-        statement6.executeUpdate();
-        statement7.executeUpdate();
-        statement8.executeUpdate();
-        statement9.executeUpdate();
-
-        statement1.close();
-        statement2.close();
-        statement3.close();
-        statement4.close();
-        statement5.close();
-        statement6.close();
-        statement7.close();
-        statement8.close();
-        statement9.close();
+        executeSQLStatements(connectDB, sqls);
 
         return connectDB;
     }
 
-    public ObservableList<TableBatsman> getBatsmanData(String tableName) throws Exception{
+    private void executeSQLStatements(Connection connection, String[] sqls) throws SQLException {
+        for (String sql : sqls) {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.executeUpdate();
+            statement.close();
+        }
+    }
+
+    public ObservableList<TableBatsman> getBatsmanData(String tableName) throws Exception {
 
 
         Connection connect = getConnection();
@@ -108,7 +88,7 @@ public class DatabaseConnection {
         PreparedStatement statement = connect.prepareStatement(sql);
         ResultSet results = statement.executeQuery();
 
-        while(results.next()){
+        while (results.next()) {
 
             String playerName = results.getString("batsman_name");
             String outType = results.getString("out_type");
@@ -118,7 +98,7 @@ public class DatabaseConnection {
             String six = results.getString("six_run");
             String strikeRate = results.getString("strike_rate");
 
-            TableBatsman batsman = new TableBatsman(playerName,outType,run,ballPlayed,four,six,strikeRate);
+            TableBatsman batsman = new TableBatsman(playerName, outType, run, ballPlayed, four, six, strikeRate);
 
             list.add(batsman);
 
@@ -127,7 +107,7 @@ public class DatabaseConnection {
 
     }
 
-    public ObservableList<TableBowler> getBowlerData(String tableName) throws Exception{
+    public ObservableList<TableBowler> getBowlerData(String tableName) throws Exception {
 
 
         Connection connect = getConnection();
@@ -138,7 +118,7 @@ public class DatabaseConnection {
         PreparedStatement statement = connect.prepareStatement(sql);
         ResultSet results = statement.executeQuery();
 
-        while(results.next()){
+        while (results.next()) {
 
             String bowlerName = results.getString("bowler_name");
             String bowlerOver = results.getString("bowler_over");
@@ -149,7 +129,7 @@ public class DatabaseConnection {
             String noBall = results.getString("no_ball");
             String economy = results.getString("economy");
 
-            TableBowler bowler = new TableBowler(bowlerName,bowlerOver,maidenOver,runGiven,wicketTaken,wideBall,noBall,economy);
+            TableBowler bowler = new TableBowler(bowlerName, bowlerOver, maidenOver, runGiven, wicketTaken, wideBall, noBall, economy);
 
             list.add(bowler);
 
