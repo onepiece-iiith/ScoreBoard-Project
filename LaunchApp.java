@@ -33,7 +33,8 @@ public class LaunchApp extends Application {
 
         Image icon = new Image("file:Final Logo.png");                                                  // For IDE
         //Image icon = new Image(getClass().getResourceAsStream("/Final Logo.png"));                      // For JAR
-        createFile();
+        DataLoader dataLoader = new DataLoader();
+        dataLoader.createFiles();
 
 
         primaryStage.getIcons().add(icon);
@@ -69,70 +70,24 @@ public class LaunchApp extends Application {
 
 
 
-    public void createFile() throws IOException {
 
+}
+
+class DataLoader{
+
+    public void createFiles() throws IOException {
 
         File teamFile = new File("/ScoreBoard/data/AllTeamName.txt");
         File playerFile = new File("/ScoreBoard/data/AllPlayerName.txt");
 
-        if (!teamFile.exists()) {
+        FileHandler fileHandler = new FileHandler();
 
-            //System.out.println("Team Don't Exists");
-
-            Path path = Paths.get("/ScoreBoard/data/");
-            Files.createDirectories(path);
-
-
-            PrintWriter output1 = new PrintWriter(teamFile);
-
-            for (String names : getTeamList()) {
-                output1.println(names);
-            }
-
-            output1.close();
-
-        }
-
-
-
-        if (!playerFile.exists()) {
-
-            //System.out.println("Player Don't Exists");
-
-            Path path = Paths.get("/ScoreBoard/data/");
-            Files.createDirectories(path);
-
-            PrintWriter output2 = new PrintWriter(playerFile);
-
-            for (String names : getPlayerList()) {
-                output2.println(names);
-            }
-
-            output2.close();
-
-        }
-
-
-        //File databaseFile = new File("/ScoreBoard/data/AllTeamName.txt");
-
+        fileHandler.createFile(teamFile, getTeamList());
+        fileHandler.createFile(playerFile, getPlayerList());
 
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     public ArrayList<String> getTeamList() throws IOException {
-
 
         ArrayList<String> list = new ArrayList<String>();
 
@@ -179,9 +134,19 @@ public class LaunchApp extends Application {
 
 
     }
+}
 
+class FileHandler{
 
-
-
-
+    public void createFile(File file, ArrayList<String> data) throws IOException{
+        if (!file.exists()) {
+            Path path = Paths.get("/ScoreBoard/data/");
+            Files.createDirectories(path);
+            PrintWriter output = new PrintWriter(file);
+            for(String names : data){
+                output.println(names);
+            }
+            output.close();
+        }
+    }
 }
